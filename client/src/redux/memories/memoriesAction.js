@@ -4,19 +4,22 @@ import * as api from '../../api/index';
 // these will be async actions fetching and updating the data;
 // for details have a look at vishwas's videos
 
-export const getPost = () => async () => {
+export const getPosts = () => async (dispatch) => {
 
     try {
-        const { val } = await api.fetchPost();
+        const { data } = await api.fetchPost();
+        console.log(data, " iam val");
+        dispatch({type: 'FETCH', payload: data});
+        
     } catch (err) {
         console.log(err.message);
     }
 }
 
-export const createPost = () => async () => {
-    try {
-        const { val } = await api.createPost();
-    } catch (err) {
-        console.log(err.message);
-    }
-}
+// export const createPost = () => async () => {
+//     try {
+//         const { val } = await api.createPost();
+//     } catch (err) {
+//         console.log(err.message);
+//     }
+// }

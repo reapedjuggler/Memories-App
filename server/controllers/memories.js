@@ -3,6 +3,7 @@ const PostMessage = require('../models/postMemory')
 const getPost = async (req, res, next) => {   
     try {
         const postMessages = await PostMessage.find();
+        console.log('iam post messages\n', postMessages, "\n");
         console.log("Worked fine");
         res.status(200).send(postMessages);
     } catch (err) {
