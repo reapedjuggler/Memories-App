@@ -11,8 +11,6 @@ const Posts = () => {
         <>  
             {/* Basically upper symbol is an alternative way to write React.fragment */}
             
-            {
-            }
             
             <h1>Iam post</h1>
             <Post />

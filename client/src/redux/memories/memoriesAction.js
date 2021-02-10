@@ -16,10 +16,15 @@ export const getPosts = () => async (dispatch) => {
     }
 }
 
-// export const createPost = () => async () => {
-//     try {
-//         const { val } = await api.createPost();
-//     } catch (err) {
-//         console.log(err.message);
-//     }
-// }
+export const createPost = (post) => async (dispatch) => {
+   
+    try {
+        
+        console.log(post, " \niam post in client\n\n");
+        const { data } = await api.createPost(post);
+        dispatch({type: 'POST', payload: data});
+
+    } catch (err) {
+        console.log(err.message);
+    }
+}

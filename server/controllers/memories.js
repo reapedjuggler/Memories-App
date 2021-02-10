@@ -14,13 +14,14 @@ const getPost = async (req, res, next) => {
 const createPost = async (req, res, next) => {
     
     const post = req.body;
+    console.log(req.body, "\n im post in server\n");
     const newPost = new PostMessage(post);
 
     try {
 
         let v = await newPost.save();
-        console.log("Post has been created \n");
-        res.status(200).send(newPost);
+        console.log("Post has been created", "\n");
+        res.status(200).json(newPost);
 
     } catch (err) {
         console.log("Error message: ", err.message, "\n");

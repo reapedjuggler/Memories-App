@@ -2,16 +2,16 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const postSchema = new Schema({
+    creator: String,
+
     title: String,
     
     message: String,
     
-    creater: String,
-    
-    tags: [String],
-    
     selectedFile: String,
     
+    tags: [String],
+
     likeCount: {
         type: Number,
         default: 0,

@@ -10,7 +10,7 @@ const memoryReducer =  (state = [], action) => {
             console.log(action.payload, " iam payload\n\n");
             return action.payload;
         case CREATE:
-            return state;
+            return [...state, action.payload];
         case LIKE:
             return state;
         case DELETE:
