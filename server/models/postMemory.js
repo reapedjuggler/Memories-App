@@ -8,7 +8,9 @@ const postSchema = new Schema({
     
     message: String,
     
-    selectedFile: String,
+    selectedFile: {
+        type: String
+    },
     
     tags: [String],
 
