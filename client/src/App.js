@@ -9,6 +9,7 @@ import Image from './assets/background/memories.png'
 import useStyles from './Styles';
 import { getPosts } from './redux/memories/memoriesAction'; 
 
+import './index.css';
 
 const App = () => {
 
