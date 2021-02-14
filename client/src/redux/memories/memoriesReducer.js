@@ -6,6 +6,7 @@ const initialState = {
 
 const memoryReducer =  (state = [], action) => {
     switch (action.type) {
+        
         case FETCH:
             console.log(action.payload, " iam payload\n\n");
             return action.payload;
@@ -16,7 +17,7 @@ const memoryReducer =  (state = [], action) => {
         case DELETE:
             return state;
         case UPDATE:
-            return state;
+            return state.map((post) => post._id === action.payload._id ? action.payload: post);
         default:
             return state;
     }   

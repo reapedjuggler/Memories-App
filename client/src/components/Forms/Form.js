@@ -4,12 +4,10 @@ import { TextField, Button, Typography, Paper } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import FileBase from 'react-file-base64'
 
-import { createPost } from '../../redux/memories/memoriesAction';
+import { createPost, updatePost } from '../../redux/memories/memoriesAction';
 
-const Form = () => {
+const Form = ({currentId, setCurrentId}) => {
 
-    const classes = useStyles();
-    const dispatch = useDispatch();
 
     const [postData, setPostData] = useState({
         creator: '',
@@ -18,10 +16,31 @@ const Form = () => {
         tags: '',
         selectedFile: ''
     });
+    const classes = useStyles();
+    const dispatch = useDispatch();
+    const post = useSelector((state) => currentId ? state.memoryReducer.find((post) => post._id === currentId) : null);
+
+    console.log(post, " iam post in form\n\n", currentId);
+
+    // For updating a post
+    useEffect(() => {
+
+        if (post) {
+          setPostData(post);
+        } 
+
+    },  [post])
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(createPost(postData));
+
+          if (!currentId)
+            dispatch(createPost(postData));
+        
+          else {
+            dispatch(updatePost(currentId, postData));
+          }
     };
 
     const clear = () => {
