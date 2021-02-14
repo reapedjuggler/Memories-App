@@ -8,7 +8,6 @@ import { createPost, updatePost } from '../../redux/memories/memoriesAction';
 
 const Form = ({currentId, setCurrentId}) => {
 
-
     const [postData, setPostData] = useState({
         creator: '',
         title: '',
@@ -50,7 +49,16 @@ const Form = ({currentId, setCurrentId}) => {
     return (
         <Paper className={classes.paper}>
           <form autoComplete="off" noValidate className={`${classes.root} ${classes.form}`} onSubmit={handleSubmit}>
-            <Typography variant = "h6"> Create a Memory </Typography>
+            
+            <Typography variant = "h6">
+            
+              { 
+                  currentId ? `Editing ` : `Creating `
+              }
+
+              a memory
+              
+            </Typography>
             
             <TextField 
             name = "creater" 
