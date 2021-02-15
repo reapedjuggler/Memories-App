@@ -3,7 +3,7 @@ const getPost = require('../controllers/memories').getPost;
 const createPost = require('../controllers/memories').createPost;
 const updatePost = require('../controllers/memories').updatePost;
 const deletePost = require('../controllers/memories').deletePost;
-const likePost = require('../')
+const likePost = require('../controllers/memories').likePost
 
 route.get('/', getPost);
 route.post('/', createPost);
