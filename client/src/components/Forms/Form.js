@@ -15,6 +15,7 @@ const Form = ({currentId, setCurrentId}) => {
         tags: '',
         selectedFile: ''
     });
+
     const classes = useStyles();
     const dispatch = useDispatch();
     const post = useSelector((state) => currentId ? state.memoryReducer.find((post) => post._id === currentId) : null);
@@ -32,7 +33,8 @@ const Form = ({currentId, setCurrentId}) => {
 
 
     const handleSubmit = (e) => {
-        e.preventDefault();
+      
+          e.preventDefault();
 
           if (!currentId)
             dispatch(createPost(postData));
@@ -40,9 +42,13 @@ const Form = ({currentId, setCurrentId}) => {
           else {
             dispatch(updatePost(currentId, postData));
           }
+          
+          clear();
+
     };
 
     const clear = () => {
+      setCurrentId(null);
       setPostData({ creator: '', title: '', message: '', tags: '', selectedFile: '' });
     }
 

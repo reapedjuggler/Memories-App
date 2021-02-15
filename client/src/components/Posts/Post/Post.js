@@ -6,6 +6,7 @@ import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import moment from 'moment';
 import { useDispatch, useSelector } from 'react-redux';
 import { updatePost } from '../../../redux/memories/memoriesAction'
+import { deletePost } from '../../../redux/memories/memoriesAction'
 
 import useStyles from './postStyles';
 
@@ -46,11 +47,11 @@ const Post = ({setCurrentId, post}) => {
                        
                         <Button size = "small" color = "primary" onClick = {() => {}}>
                             <ThumbUpAltIcon fontSize = "small" />
-                                Like
+                                Like 
                                 {post.likeCount}
                         </Button>
 
-                        <Button size = "small" color = "primary" onClick = {() => {}}>
+                        <Button size = "small" color = "primary" onClick = {() => dispatch(deletePost(post._id))}>
                             <DeleteIcon fontSize = "small" />
                                 Delete
                         </Button>

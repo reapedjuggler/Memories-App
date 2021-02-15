@@ -18,10 +18,10 @@ const App = () => {
     const [currentId, setCurrentId] = useState(null);
 
     useEffect(() => {
-        console.log(" hello dispatch 1\n");
+        // console.log(" hello dispatch 1\n");
         dispatch(getPosts());        
-        console.log(" hello dispatch 2\n");
-    }, [dispatch]);
+        // console.log(" hello dispatch 2\n");
+    }, [currentId, dispatch]);
 
     return (
         <div>

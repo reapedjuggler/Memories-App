@@ -19,7 +19,6 @@ export const getPosts = () => async (dispatch) => {
 export const createPost = (post) => async (dispatch) => {
    
     try {
-        
         console.log(post, " \niam post in client\n\n");
         const { data } = await api.createPost(post);
         dispatch({type: 'POST', payload: data});
@@ -39,5 +38,16 @@ export const updatePost = (id, post) => async(dispatch) => {
     catch (err) {
         console.log(err.message);
     }
-
 }
+
+export const deletePost = (id) => async(dispatch) => {
+    
+    try {
+        await api.deletePost(id);
+        dispatch({type: 'DELETE', payload: id})
+    }
+
+    catch (err) {
+        console.log(err);
+    }
+};

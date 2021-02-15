@@ -15,7 +15,7 @@ const memoryReducer =  (state = [], action) => {
         case LIKE:
             return state;
         case DELETE:
-            return state;
+            return state.filter((post) => post._id !== action.payload._id ? post: null);
         case UPDATE:
             return state.map((post) => post._id === action.payload._id ? action.payload: post);
         default:
