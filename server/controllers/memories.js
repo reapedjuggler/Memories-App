@@ -1,6 +1,8 @@
+const mongoose = require('mongoose');
 const PostMessage = require('../models/postMemory')
 
 const getPost = async (req, res, next) => {   
+    
     try {
         const postMessages = await PostMessage.find();
         console.log('iam post messages\n', postMessages, "\n");
@@ -36,19 +38,55 @@ const updatePost = async (req, res, next) => {
 
     post = req.body;
 
-    const updatePost = await PostMessage.findByIdAndUpdate(_id, post, {new: true});
+    const updatePost = await PostMessage.findByIdAndUpdate(_id, { ...post, _id }, {new: true});
 
     try {
-        
+        console.log(updatePost);
     }  
     catch (err) {
-
+        console.log(err);
     } 
 
 }
+
+const deletePost = async (req, res, next) => {
+    
+    const { id } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('Sorry no post available with that id')
+
+    await PostMessage.findByIdAndRemove(id);
+
+    console.log("  Post deleted tk \n");
+
+    res.json('Post Deleted Successfully')
+
+}
+
+const likePost = async (req, res, next) => {
+
+    const { id } = req.params;
+
+    const post = req.body;
+
+    if (!mongoose.Types.ObjectId.isValid(id))  return res.status(404).send('No Post available with that id');
+
+    const updatedPost = await PostMessage.findByIdAndUpdate(id, {likeCount: post.likeCount + 1}, {new: true});
+
+    try {
+        console.log(updatedPost);
+    }
+
+    catch (err) {
+        console.log(err);
+    }
+
+};
 
 exports = module.exports = {
     getPost,
     createPost,
     updatePost,
+    deletePost,
+    likePost,
 }
