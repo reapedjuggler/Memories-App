@@ -7,15 +7,16 @@ import {Grid, CircularProgress} from '@material-ui/core'
 const Posts = ({ setCurrentId }) => {
 
     const posts = useSelector((state) => state.memoryReducer)
+    console.log(posts, " hey iam Posts\n");
     const classes = useStyles();
-    console.log(posts, " iam posts");
 
     return (
         <>  
             {/* Basically upper symbol is an alternative way to write React.fragment */}
             
             {
-                !posts.length ? <CircularProgress />:
+                !posts.length ? <CircularProgress /> :
+                
                 <Grid className={classes.container} container alignItems = "stretch" spacing = {3}> 
                     {
                         posts.map((post) => (

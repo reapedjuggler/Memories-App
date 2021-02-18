@@ -13,37 +13,33 @@ const getPost = async (req, res, next) => {
     }
 }
 
-const createPost = async (req, res, next) => {
-    
-    const post = req.body;
-    console.log(req.body, "\n im post in server\n");
-    const newPost = new PostMessage(post);
+const createPost = async (req, res) => {
+    const { title, message, selectedFile, creator, tags } = req.body;
+
+    const newPostMessage = new PostMessage({ title, message, selectedFile, creator, tags })
 
     try {
+        await newPostMessage.save();
 
-        let v = await newPost.save();
-        console.log("Post has been created", "\n");
-        res.status(200).json(newPost);
-
-    } catch (err) {
-        console.log("Error message: ", err.message, "\n");
-        res.status(409).send({message: err.message});
+        res.status(201).json(newPostMessage );
+    } catch (error) {
+        res.status(409).json({ message: error.message });
     }
 }
 
 const updatePost = async (req, res, next) => {
     const { id: _id } =  req.params;
-    
-    if (!mongoose.Types.ObjectId.isValid(_id)) return res.statues(404).send('Sorry there are no post available with that Id');
-
+ 
     post = req.body;
 
     const updatePost = await PostMessage.findByIdAndUpdate(_id, { ...post, _id }, {new: true});
 
     try {
-        console.log(updatePost);
+        // console.log(updatePost);
+        res.status(200).json(updatePost);
     }  
     catch (err) {
+        // console.log("SHIT!");
         console.log(err);
     } 
 
@@ -56,8 +52,6 @@ const deletePost = async (req, res, next) => {
     if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('Sorry no post available with that id')
 
     await PostMessage.findByIdAndRemove(id);
-
-    console.log("  Post deleted tk \n");
 
     res.json('Post Deleted Successfully')
 

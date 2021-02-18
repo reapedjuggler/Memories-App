@@ -8,7 +8,7 @@ export const getPosts = () => async (dispatch) => {
 
     try {
         const { data } = await api.fetchPost();
-        console.log(data, " iam val");
+        // console.log(data, " iam val");
         dispatch({type: 'FETCH', payload: data});
         
     } catch (err) {
@@ -19,10 +19,9 @@ export const getPosts = () => async (dispatch) => {
 export const createPost = (post) => async (dispatch) => {
    
     try {
-        
-        console.log(post, " \niam post in client\n\n");
+
         const { data } = await api.createPost(post);
-        dispatch({type: 'POST', payload: data});
+        dispatch({type: CREATE, payload: data});
 
     } catch (err) {
         console.log(err.message);
@@ -32,8 +31,13 @@ export const createPost = (post) => async (dispatch) => {
 export const updatePost = (id, post) => async(dispatch) => {
 
     try {
-        const { data } = await api.updatePost(id, post);
-        dispatch({type: 'UPDATE', payload: data});
+
+        const ace = await api.updatePost(id, post);
+        
+        console.log(ace, "\nftw :D \n\n");
+
+        const { data } = ace;
+        dispatch({type: UPDATE, payload: data});
     }
 
     catch (err) {
@@ -45,7 +49,7 @@ export const deletePost = (id) => async(dispatch) => {
     
     try {
         await api.deletePost(id);
-        dispatch({type: 'DELETE', payload: id})
+        dispatch({type: DELETE, payload: id})
     }
 
     catch (err) {

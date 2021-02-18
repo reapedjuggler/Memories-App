@@ -5,6 +5,7 @@ const updatePost = require('../controllers/memories').updatePost;
 const deletePost = require('../controllers/memories').deletePost;
 const likePost = require('../controllers/memories').likePost
 
+
 route.get('/', getPost);
 route.post('/', createPost);
 route.patch('/:id', updatePost);

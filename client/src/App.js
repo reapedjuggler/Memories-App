@@ -15,19 +15,18 @@ const App = () => {
 
     const classes = useStyles();
     const dispatch = useDispatch();
-    const [currentId, setCurrentId] = useState(null);
+    const [currentId, setCurrentId] = useState(0);
 
     useEffect(() => {
-        // console.log(" hello dispatch 1\n");
-        dispatch(getPosts());        
-        // console.log(" hello dispatch 2\n");
+        dispatch(getPosts());
+        console.log("Iam rendered");        
     }, [currentId, dispatch]);
 
     return (
         <div>
             {/* Container for the App bar */}
             <Container maxWidth = "lg">
-                
+                 
                 <AppBar className = {classes.appBar}  position="static" color = "inherit">
                     <Typography className = {classes.heading} variant = "h3" align = "center"> Memories </Typography> 
                     <img src = {Image} alt = "memories" height = "60"></img>

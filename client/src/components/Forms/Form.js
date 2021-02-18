@@ -19,9 +19,7 @@ const Form = ({currentId, setCurrentId}) => {
     const classes = useStyles();
     const dispatch = useDispatch();
     const post = useSelector((state) => currentId ? state.memoryReducer.find((post) => post._id === currentId) : null);
-
-    console.log(post, " iam post in form\n\n", currentId);
-
+   
     // For updating a post
     useEffect(() => {
 
@@ -32,25 +30,25 @@ const Form = ({currentId, setCurrentId}) => {
     },  [post])
 
 
-    const handleSubmit = (e) => {
+    const clear = () => {
+      setCurrentId(0);
+      setPostData({ creator: '', title: '', message: '', tags: '', selectedFile: '' });
+    }
+
+    const handleSubmit = async (e) => {
       
           e.preventDefault();
 
-          if (!currentId)
+          if (currentId === 0) {
             dispatch(createPost(postData));
-        
+          }
+
           else {
             dispatch(updatePost(currentId, postData));
           }
           
           clear();
-
     };
-
-    const clear = () => {
-      setCurrentId(null);
-      setPostData({ creator: '', title: '', message: '', tags: '', selectedFile: '' });
-    }
 
     return (
         <Paper className={classes.paper}>
@@ -58,7 +56,7 @@ const Form = ({currentId, setCurrentId}) => {
             
             <Typography variant = "h6">
             
-              { 
+              {   
                   currentId ? `Editing ` : `Creating `
               }
 
@@ -92,10 +90,10 @@ const Form = ({currentId, setCurrentId}) => {
             
             <TextField 
             name = "tags" 
-            variant = "outlined" 
+            variant = "outlined"  
             label = "tags" 
             value = {postData.tags}
-            onChange = {(e) => setPostData({...postData, tags: e.target.value})}
+            onChange = {(e) => setPostData({...postData, tags: e.target.value.split(',')})}
             fullWidth/>
 
             
@@ -103,7 +101,7 @@ const Form = ({currentId, setCurrentId}) => {
               <FileBase
                 type = "file"
                 multiple = {false}
-                onDone = {(base64) => setPostData({...postData, selectedFile: base64})}
+                onDone = {({base64}) => setPostData({...postData, selectedFile: base64})}
               />
             </div>
             

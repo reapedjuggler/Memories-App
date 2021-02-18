@@ -4,13 +4,12 @@ const url = "http://localhost:8000/index";
 
 export const fetchPost = () => axios.get(url);
 
-export const createPost = (data) => {
-    console.log(data, "\niam data in axios");
-    axios.post(url, data);
+export const createPost = (newPost) => {
+    return axios.post(url, newPost);             // Forgot this " return "" mofo :/
 };
 
 export const updatePost = (id, updatedPost) => {
-    axios.patch(`${url}/${id}`, updatedPost);
+    return axios.patch(`${url}/${id}`, updatedPost);
 };
 
 export const deletePost = (id) => {
@@ -18,5 +17,5 @@ export const deletePost = (id) => {
 }
 
 export const likePost = (id) => {
-    axios.patch(`${url}/${id}/likePost`);
+    return axios.patch(`${url}/${id}/likePost`);
 }
