@@ -1,51 +1,35 @@
-import React, { useState, useEffect } from 'react'
-import { Container, AppBar, Typography, Grow, Grid } from '@material-ui/core';
-import Posts from './components/Posts/Posts';
-import Form from './components/Forms/Form'
-import { useDispatch } from 'react-redux';
+import React from 'react'
+import { Container} from '@material-ui/core';
+import { Switch, Route, BrowserRouter } from 'react-router-dom';
 
-
-import Image from './assets/background/memories.png'
-import useStyles from './Styles';
-import { getPosts } from './redux/memories/memoriesAction'; 
+import Home from './components/Home/Home';
+import Navbar from './components/NavBar/Navbar';
+import Auth from './components/Auth/Auth';
 
 import './index.css';
 
 const App = () => {
 
-    const classes = useStyles();
-    const dispatch = useDispatch();
-    const [currentId, setCurrentId] = useState(0);
-
-    useEffect(() => {
-        dispatch(getPosts());
-        console.log("Iam rendered");        
-    }, [currentId, dispatch]);
-
     return (
+     
         <div>
+            
             {/* Container for the App bar */}
-            <Container maxWidth = "lg">
-                 
-                <AppBar className = {classes.appBar}  position="static" color = "inherit">
-                    <Typography className = {classes.heading} variant = "h3" align = "center"> Memories </Typography> 
-                    <img src = {Image} alt = "memories" height = "60"></img>
-                </AppBar>
+            <BrowserRouter>
+            
+                <Container maxWidth = "lg">
 
-                <Grow in>        
-                    <Container> 
-                        <Grid container justify = "space-between" alignItems = "stretch" spacing = {3}>
-                            <Grid item xs = {12} sm = {7}> 
-                                <Posts setCurrentId = {setCurrentId} />
-                            </Grid>
+                    <Navbar />
 
-                            <Grid item xs = {12} sm = {4}> 
-                                <Form currentId = {currentId} setCurrentId = {setCurrentId}/>
-                            </Grid> 
-                        </Grid>
-                    </Container>
-                </Grow>
-            </Container>
+                    <Switch>
+                        <Route exact path="/" component = {Home} />
+                        <Route exact path="/auth" component = {Auth} />
+                    </Switch>
+                    
+                    {/* <Home /> */}
+
+                </Container>
+            </BrowserRouter>
         </div>
     )
 }

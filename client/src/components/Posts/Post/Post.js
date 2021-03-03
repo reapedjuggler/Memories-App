@@ -14,12 +14,6 @@ const Post = ({setCurrentId, post}) => {
     const classes = useStyles();
     const dispatch = useDispatch();
 
-    // useEffect(() => {
-
-        
-
-    // }, [post]);
-
     return (
         <Card className={classes.card}>
           
