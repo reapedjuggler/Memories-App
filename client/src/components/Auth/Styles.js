@@ -1,3 +1,4 @@
+import { blue, yellow } from '@material-ui/core/colors';
 import {
   makeStyles
 } from '@material-ui/core/styles';
@@ -23,10 +24,6 @@ export default makeStyles((theme) => ({
     marginTop: theme.spacing(4),
   },
 
-  divElement: {
-    width: 200,
-    marginLeft: 20,
-  },
 
   email: {
     marginLeft: 90,
@@ -38,14 +35,40 @@ export default makeStyles((theme) => ({
 
   last: {
     marginLeft: 90,
-    border: '0px solid',
-    borderRadius: 3,
+    border: '0px',
+    borderRadius: 4,
     marginBottom: 10,
   },
 
+
+  signUpBtn: {
+    backgroundColor: 'green'
+  },
+
+  divEle: {
+    marginLeft: 150,
+    border: '0px',
+    borderRadius: 4,
+    marginBottom: 10,
+  },
+
+
+  signedUp: {
+    border: '0px',
+    borderRadius: 4,
+    marginBottom: 10,
+    fontFamily: ['Raleway'],
+  },
+
+  signInOpt: {
+    justifyContent: 'center',
+  },
+
+  // This is how we can post a Image in the background in MATERIAL-UI
+
   paperContainer: {
     backgroundImage: `url(${Image})`,
-    marginTop: theme.spacing(8),
+    marginTop: theme.spacing(5),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -54,29 +77,29 @@ export default makeStyles((theme) => ({
 
   first: {
     marginLeft: 90,
-    border: '0px solid',
-    borderRadius: 3,
+    border: '0px ',
+    borderRadius: 4,
     marginBottom: 10,
   },
 
   pass: {
     marginLeft: 90,
-    border: '0px solid',
-    borderRadius: 3,
+    border: '0px ',
+    borderRadius: 4,
     marginBottom: 10,
   },
 
   cnf: {
     marginLeft: 90,
-    border: '0px solid',
-    borderRadius: 3,
+    border: '0px ',
+    borderRadius: 4,
     marginBottom: 10,
   },
 
   password: {
     marginLeft: 90,
-    border: '0px solid',
-    borderRadius: 3,
+    border: '0px ',
+    borderRadius: 4,
   },
 
   signup: {
@@ -84,6 +107,7 @@ export default makeStyles((theme) => ({
   },
 
   submit: {
+    justifyContent: 'center',
     margin: theme.spacing(3, 0, 2),
   },
 

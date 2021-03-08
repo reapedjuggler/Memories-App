@@ -16,8 +16,9 @@ const Input = ({name, handleChange, type, handleShow, label}) => {
             <Grid className={classes.paperContainer}>
 
                 <TextField 
-                
+                    className={classes.root}
                     required
+                    id = "standard-basic"
                     variant = "outlined"
                     fullWidth
                     autoFocus
@@ -49,13 +50,7 @@ const Input = ({name, handleChange, type, handleShow, label}) => {
                                 )
                             }
 
-                        ) : (
-
-                            <>
-
-                            </>
-
-                        )
+                        ) : null
                     }
                 />            
 

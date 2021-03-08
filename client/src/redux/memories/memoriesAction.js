@@ -68,3 +68,17 @@ export const likePost = (id) => async(dispatch) => {
     }
 
 }
+
+// export const auth = ({finalResp}) => {
+
+//     try {
+
+//         disp
+
+//     }
+
+//     catch (err) {
+
+//     }
+
+// }

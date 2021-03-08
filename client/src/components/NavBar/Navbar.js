@@ -18,8 +18,13 @@ const Navbar = () => {
         <AppBar className = {classes.appBar}  position="static" color = "inherit">
 
             <div className={classes.brandContainer}>
+            
+            <Button component = {Link} to = "/" >  
+                <Typography className = {classes.heading} variant = "h3" align = "center"> 
+                    HOME
+                </Typography> 
+            </Button>
                 
-                <Typography component = {Link} className = {classes.heading} variant = "h3" align = "center"> Memories </Typography> 
                 <img className = {classes.image} src = {Image} alt = "memories" height = "60"></img>
 
             </div>

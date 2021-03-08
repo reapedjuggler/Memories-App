@@ -84,6 +84,7 @@ const Form = ({currentId, setCurrentId}) => {
             name = "message" 
             variant = "outlined" 
             label = "message" 
+            className = {classes.message}
             value = {postData.message}
             onChange = {(e) => setPostData({...postData, message: e.target.value})}
             fullWidth/>

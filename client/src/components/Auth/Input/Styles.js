@@ -1,93 +1,92 @@
 import {
-    makeStyles
-  } from '@material-ui/core/styles';
-  import Image from '../../../assets/background/memories.jpeg';
-  
-  export default makeStyles((theme) => ({
-    paper: {
-     
-    },
-    root: {
-      '& .MuiTextField-root': {
-        margin: theme.spacing(1),
-      },
-    },
-  
-    avatar: {
+  makeStyles
+} from '@material-ui/core/styles';
+import Image from '../../../assets/background/memories.jpeg';
+
+export default makeStyles((theme) => ({
+  paper: {
+   
+  },
+  root: {
+    '& .MuiTextField-root': {
       margin: theme.spacing(1),
-      backgroundColor: theme.palette.secondary.dark,
+      justifyContent: 'center',
     },
-  
-    form: {
-      width: '100%', // Fix IE 11 issue.
-      marginTop: theme.spacing(4),
-    },
-  
-    divElement: {
-      width: 200,
-      marginLeft: 20,
-    },
-  
-    email: {
-      marginLeft: 90,
-      border: '0px solid',
-      borderRadius: 3,
-      marginBottom: 10,
-    },
-  
-  
-    last: {
-      marginLeft: 90,
-      border: '0px solid',
-      borderRadius: 3,
-      marginBottom: 10,
-    },
-  
-    paperContainer: {
-      backgroundImage: `url(${Image})`,
-      marginTop: theme.spacing(8),
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      padding: theme.spacing(2),
-    },
-  
-    first: {
-      marginLeft: 90,
-      border: '0px solid',
-      borderRadius: 3,
-      marginBottom: 10,
-    },
-  
-    pass: {
-      marginLeft: 90,
-      border: '0px solid',
-      borderRadius: 3,
-      marginBottom: 10,
-    },
-  
-    cnf: {
-      marginLeft: 90,
-      border: '0px solid',
-      borderRadius: 3,
-      marginBottom: 10,
-    },
-  
-    password: {
-      marginLeft: 90,
-      border: '0px solid',
-      borderRadius: 3,
-    },
-  
-    signup: {
-      border: '1px solid',
-    },
-  
-    submit: {
-      margin: theme.spacing(3, 0, 2),
-    },
-  
-    googleButton: {
-      marginBottom: theme.spacing(2),
-    },
-  }));
+  },
+
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.secondary.dark,
+  },
+
+  form: {
+    width: '100%', // Fix IE 11 issue.
+    marginTop: theme.spacing(4),
+  },
+
+
+  email: {
+    marginLeft: 90,
+    border: '0px solid',
+    borderRadius: 3,
+    marginBottom: 10,
+  },
+
+
+  last: {
+    marginLeft: 90,
+    border: '0px',
+    borderRadius: 4,
+    marginBottom: 10,
+  },
+
+  // This is how we can post a Image in the background in MATERIAL-UI
+
+  paperContainer: {
+    backgroundImage: `url(${Image})`,
+    marginTop: theme.spacing(5),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    padding: theme.spacing(2),
+  },
+
+  first: {
+    marginLeft: 90,
+    border: '0px ',
+    borderRadius: 4,
+    marginBottom: 10,
+  },
+
+  pass: {
+    marginLeft: 90,
+    border: '0px ',
+    borderRadius: 4,
+    marginBottom: 10,
+  },
+
+  cnf: {
+    marginLeft: 90,
+    border: '0px ',
+    borderRadius: 4,
+    marginBottom: 10,
+  },
+
+  password: {
+    marginLeft: 90,
+    border: '0px ',
+    borderRadius: 4,
+  },
+
+  signup: {
+    border: '1px solid',
+  },
+
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+  },
+
+  googleButton: {
+    marginBottom: theme.spacing(2),
+  },
+}));
