@@ -15,18 +15,22 @@ const Auth = () => {
     const classes = useStyles();
     const dispatch = useDispatch();           // setting a ref to useDispatch so that we can fire an action directly from here
 
-    const sucResponseGoogle = async (res) => {
+    const sucResponseGoogle = async (response) => {
+    
+        console.log("Yay Success!");
+
+        console.log(response); 
+
+        const tokenId = response?.tokenId;
+        const profile = response?.profileObj;
+
+        // console.log(profile, " \n\n", tokenId);
+    
+        const finalResp = {result: profile, tokenId: tokenId};
+
+        // dispatch({type: 'AUTH', payload: {profile, tokenId}});
         
-        const result = res?.profileObj;
-        const token = res?.tokenId;
-    
-        try {
-          dispatch({ type: 'AUTH', data: { result, token } });
-    
-        //   history.push('/');
-        } catch (error) {
-          console.log(error);
-        }
+        dispatch ({type: 'AUTH', payload: {profile, tokenId}});
 
     }
 
