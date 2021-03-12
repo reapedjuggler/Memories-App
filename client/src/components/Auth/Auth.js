@@ -19,7 +19,7 @@ const Auth = () => {
     
         console.log("Yay Success!");
 
-        console.log(response); 
+        // console.log(response); 
 
         const tokenId = response?.tokenId;
         const profile = response?.profileObj;
@@ -29,8 +29,13 @@ const Auth = () => {
         const finalResp = {result: profile, tokenId: tokenId};
 
         // dispatch({type: 'AUTH', payload: {profile, tokenId}});
+
         
+        // setIsLog(true);
+
         dispatch ({type: 'AUTH', payload: {profile, tokenId}});
+
+        // setIsLog(true);
 
     }
 
