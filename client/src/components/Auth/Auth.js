@@ -3,6 +3,7 @@ import {Grid, Paper, Typography, Avatar, Container, TextField, Button} from '@ma
 import { GoogleLogin } from 'react-google-login';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { useDispatch } from 'react-redux';
+import { useHistory } from "react-router-dom";
 
 import useStyles from './Styles';
 
@@ -14,28 +15,28 @@ const Auth = () => {
     const [isLog, setIsLog] = useState(false);
     const classes = useStyles();
     const dispatch = useDispatch();           // setting a ref to useDispatch so that we can fire an action directly from here
+    const history = useHistory();
 
     const sucResponseGoogle = async (response) => {
     
         console.log("Yay Success!");
-
         // console.log(response); 
 
         const tokenId = response?.tokenId;
         const profile = response?.profileObj;
 
-        // console.log(profile, " \n\n", tokenId);
-    
         const finalResp = {result: profile, tokenId: tokenId};
 
-        // dispatch({type: 'AUTH', payload: {profile, tokenId}});
+        try {
+            
+            dispatch ({type: 'AUTH', payload: {profile, tokenId}});
+            history.push('/');
 
-        
-        // setIsLog(true);
+        }
 
-        dispatch ({type: 'AUTH', payload: {profile, tokenId}});
+        catch (err) {
 
-        // setIsLog(true);
+        }
 
     }
 

@@ -2,6 +2,9 @@ import React, {useState, useEffect} from 'react'
 import { AppBar, Avatar, Typography, Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { Toolbar } from '@material-ui/core';
+import { useHistory } from 'react-router';
+import { useDispatch } from 'react-redux';
+import {useLocation} from 'react-router';
 
 // import { Container, AppBar, Typography, Grow, Grid } from '@material-ui/core';
 
@@ -12,6 +15,9 @@ const Navbar = () => {
     
     const classes = useStyles();
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('authDetails')));
+    const history = useHistory();
+    const location = useLocation();
+    const dispatch = useDispatch();
 
     console.log(user, " Why aint i logged in!!");
 
@@ -23,27 +29,32 @@ const Navbar = () => {
     // }, []);
 
 
-    // useEffect(() => {
+    // we need to render this once we get a valid user so ................
 
-    //     const isSessionToken = user?.tokenId;
+    useEffect(() => {
 
-    //     if (isSessionToken === true) {
-            
-    //         // if ()
+        const token = user?.tokenId;
 
-    //         /*
+        // We need to implement the JWT over here
+       
+        setUser(JSON.parse(localStorage.getItem('authDetails')));
 
-    //             if (isSessionToken.) {
+    }, [location]);
 
-    //             }
+    const logOutUser = () => {
 
-    //          */
+        dispatch({type: 'LOGOUT'})        
 
-    //     }
+        // So basically we need two things to logout 
+        // push the home route to the history
 
-    //     // setUser(JSON.parse(localStorage.getItem('authDetails')));
+        // and set the user to null
 
-    // }, []);
+        history.push('/');
+
+        setUser(null);
+
+    }
 
     return (
         
@@ -68,7 +79,7 @@ const Navbar = () => {
                         <div className={classes.profile}>
                             <Avatar className={classes.purple} alt = {user.profile.name} src = {user.profile.imageUrl}> {user?.profile?.name.charAt(0)} </Avatar>
                             <Typography className={classes.userName} varaint = "h6"> {user.profile.name} </Typography>
-                            <Button variant = "contained" className={classes.logout}> Logout </Button>
+                            <Button variant = "contained" className={classes.logout} onClick = {logOutUser}> Logout </Button>
                         </div>
                     ) : (
                         <Button variant = "contained" component = {Link} to = "/auth" color = "primary" > Sign In </Button>
