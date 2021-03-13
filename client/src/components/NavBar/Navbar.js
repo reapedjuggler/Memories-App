@@ -29,7 +29,7 @@ const Navbar = () => {
     // }, []);
 
 
-    // we need to render this once we get a valid user so ................
+    // we need to render this once we get a valid user so that it gets redirected to home from /auth
 
     useEffect(() => {
 
@@ -43,7 +43,7 @@ const Navbar = () => {
 
     const logOutUser = () => {
 
-        dispatch({type: 'LOGOUT'})        
+        dispatch({type: 'LOGOUT'})          
 
         // So basically we need two things to logout 
         // push the home route to the history

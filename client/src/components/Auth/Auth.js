@@ -12,10 +12,19 @@ import Icon from './Icon';
 
 const Auth = () => {
 
+    const intitalFormData = {
+        firstName: '',
+        lastName: '',
+        email: '',
+        password: '',
+        cnfPassword: ''  
+    };
+
     const [isLog, setIsLog] = useState(false);
     const classes = useStyles();
     const dispatch = useDispatch();           // setting a ref to useDispatch so that we can fire an action directly from here
     const history = useHistory();
+    const [formData, setFormData] = useState(intitalFormData);
 
     const sucResponseGoogle = async (response) => {
     
@@ -53,12 +62,15 @@ const Auth = () => {
 
     };
 
-    const handleSubmit = () => {
+    const handleSubmit = (e) => {
+
+        e.preventDefault();          // Because React's default behaviour is to refresh the page when a form gets submitted;
+        setFormData(intitalFormData);
 
     };
 
-    const handleChange = () => {
-
+    const handleChange = (e) => {
+        setFormData({...intitalFormData, [e.target.name]: e.target.value});
     };
     // const 
 
@@ -144,7 +156,6 @@ const Auth = () => {
                                                         </Button>
                                                     
                                                     )}
-
                                                 />                                            
                                             
                                             </Grid>
@@ -159,11 +170,19 @@ const Auth = () => {
                                     <>
                                         <Grid container>
                                             <Grid item>
-                                            <Input required label = "First Name" name = "FirstName" type = "text" handleChange={handleChange}  />                                
+                                            
+                                            <Input required label = "First Name" name = "firstName" type = "text" handleChange={handleChange}  />                                
+                                            
                                             </Grid>
+                                            
                                             <Grid item>
-                                            <Input required label = "Last Name" name = "LastName" type = "text" handleChange={handleChange} />
+                                            
+                                            <Input required label = "Last Name" name = "lastName" type = "text" handleChange={handleChange} />
+                                            
                                             </Grid>
+                                            
+                                            <Input required label = "Pass-Word" type = "cnfPassword" name = "Confirm Password" handleChange={showPass} />
+                                            
                                             <Input required label = "Confirm Pass-Word" type = "password" name = "Confirm Password" handleChange={showPass} />
                                             
                                             <div className = {classes.divEle}>
