@@ -52,6 +52,12 @@ export default makeStyles((theme) => ({
     marginBottom: 10,
   },
 
+  divEleSignIn: {
+    marginLeft: 110,
+    border: '0px',
+    borderRadius: 4,
+    marginBottom: 10,
+  },
 
   signedUp: {
     border: '0px',

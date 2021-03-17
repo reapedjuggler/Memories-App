@@ -4,6 +4,7 @@ import { GoogleLogin } from 'react-google-login';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { useDispatch } from 'react-redux';
 import { useHistory } from "react-router-dom";
+import {signUp, signIn} from '../../redux/memories/auth';
 
 import useStyles from './Styles';
 
@@ -12,7 +13,7 @@ import Icon from './Icon';
 
 const Auth = () => {
 
-    const intitalFormData = {
+    const initialFormData = {
         firstName: '',
         lastName: '',
         email: '',
@@ -24,7 +25,8 @@ const Auth = () => {
     const classes = useStyles();
     const dispatch = useDispatch();           // setting a ref to useDispatch so that we can fire an action directly from here
     const history = useHistory();
-    const [formData, setFormData] = useState(intitalFormData);
+    const [formData, setFormData] = useState(initialFormData);
+    // console.log(initialFormData, " Iam form data \n\n");
 
     const sucResponseGoogle = async (response) => {
     
@@ -64,15 +66,37 @@ const Auth = () => {
 
     const handleSubmit = (e) => {
 
-        e.preventDefault();          // Because React's default behaviour is to refresh the page when a form gets submitted;
-        setFormData(intitalFormData);
+        // e.preventDefault();          // Because React's default behaviour is to refresh the page when a form gets submitted;
+        console.log(formData, "  Iam form data after update\n\n");
+
+        if (isLog) 
+            dispatch(signIn({formData, history}));
+        else {
+            dispatch(signUp({formData, history}));
+        }
 
     };
+ 
+    /*  IMP!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  */
+
+    // To get the field of which you're updating the value we have a keyword named e.target.name
 
     const handleChange = (e) => {
-        setFormData({...intitalFormData, [e.target.name]: e.target.value});
+        e.preventDefault();
+        // const fieldNeedToBeUpdated = e.target.name;
+        // console.log(e.target.value,  " --- ", e.target.name, " Iam event \n\n\n");
+
+        /* 
+            We cant use fieldNeedToBeUpdated as it is because It will create a new field with that name 
+        
+            And on the Contrary we want to update a particular field so we need to specify it in the below given manner inside [  ] these brackets;
+        
+        */
+
+        setFormData({...formData, [e.target.name]: e.target.value});
     };
-    // const 
+    
+
 
     
     const changeVisibility = () => {
@@ -108,21 +132,17 @@ const Auth = () => {
                                     {/* <Container> </Container> */}
                                     <Container  maxWidth = "sm">
                                      
-                                        <Grid  spacing = {4} container>
-                                            
-                                            <Grid item xs = {12} sm = {6} md = {6} >
-                                            
-                                                <Typography variant = "h5" color = "primary" className={classes.signInOpt}> Not Signed Up ?</Typography>  
+                                        <div className = {classes.divEleSignIn}>
+                                            <Typography variant = "h5"> 
+                                                <Button variant = "contained" color = "primary" onClick={handleSubmit} >    
+                                                   Sign In 
+                                                </Button>
+                                            </Typography>
+                                        </div>
 
-                                            </Grid>
-                                        
-                                            <Grid item xs = {12} sm = {6} md = {6}>
-                                        
-                                                <Button variant = "contained" color = "primary" onClick = {changeVisibility}> Sign Up </Button>
-
-                                            </Grid>
-                                        
-                                        </Grid>
+                                        <br />
+                                        <br />
+                                        <br />
 
                                         <Grid spacing = {4} container>
 
@@ -162,6 +182,22 @@ const Auth = () => {
 
                                         </Grid>
 
+                                        <Grid  spacing = {4} container>
+                                            
+                                            <Grid item xs = {12} sm = {6} md = {6} >
+                                            
+                                                <Typography variant = "h6" color = "primary" className={classes.signInOpt}> Not Signed Up ?</Typography>  
+
+                                            </Grid>
+                                        
+                                            <Grid item xs = {12} sm = {6} md = {6}>
+                                        
+                                                <Button variant = "contained" color = "primary" onClick = {changeVisibility}> Sign Up </Button>
+
+                                            </Grid>
+                                        
+                                        </Grid>
+
                                       </Container>
                                     </>
                                  
@@ -181,12 +217,14 @@ const Auth = () => {
                                             
                                             </Grid>
                                             
-                                            <Input required label = "Pass-Word" type = "cnfPassword" name = "Confirm Password" handleChange={showPass} />
+                                            {/* Not Needed as we have rendered it eitherway */}
+
+                                            {/* <Input required label = "Pass-Word" type = "cnfPassword" name = "Confirm Password" handleChange={showPass} /> */}
                                             
                                             <Input required label = "Confirm Pass-Word" type = "password" name = "Confirm Password" handleChange={showPass} />
                                             
                                             <div className = {classes.divEle}>
-                                            <Button size = "large" variant = "contained" color = "primary"> Submit </Button>  
+                                            <Button size = "large" variant = "contained" color = "primary" onClick = {handleSubmit}> Submit </Button>  
                                             </div>
                                             
                                             <p> <p> &nbsp;&nbsp; </p> </p>                 

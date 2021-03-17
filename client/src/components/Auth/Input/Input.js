@@ -24,7 +24,7 @@ const Input = ({name, handleChange, type, handleShow, label}) => {
                     autoFocus
                     name = {name}
                     onChange = {handleChange}
-                    type = "password"
+                    type = {type}
                     label = {label}
                    
                     InputElement = {
