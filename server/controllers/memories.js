@@ -5,7 +5,7 @@ const getPost = async (req, res, next) => {
     
     try {
         const postMessages = await PostMessage.find();
-        console.log('iam post messages\n', postMessages, "\n");
+        // console.log('iam post messages\n', postMessages, "\n");
         console.log("Worked fine");
         res.status(200).send(postMessages);
     } catch (err) {
@@ -20,7 +20,6 @@ const createPost = async (req, res) => {
 
     try {
         await newPostMessage.save();
-
         res.status(201).json(newPostMessage );
     } catch (error) {
         res.status(409).json({ message: error.message });
@@ -47,7 +46,7 @@ const updatePost = async (req, res, next) => {
 
 const deletePost = async (req, res, next) => {
     
-    const { id } = req.params;
+    const { id } = req.params;    
 
     if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('Sorry no post available with that id')
 
@@ -61,10 +60,23 @@ const likePost = async (req, res, next) => {
 
     const { id } = req.params;
 
+    if (!req.userId) return res.json({message: 'Sorry! You are not authorized to do so :('})
+
     if (!mongoose.Types.ObjectId.isValid(id))  return res.status(404).send('No Post available with that id');
 
     const post = await PostMessage.findById(id);
-    const updatedPost = await PostMessage.findByIdAndUpdate(id, {likeCount: post.likeCount + 1}, {new: true});
+    
+    // first check if he has already liked the post then we wont let him again do it 
+
+    const ind = post.likes.findIndex((id) => String(id) === String(req.userId));
+
+    if (ind === -1) {
+        post.likes.push(req.userId);    
+    } else {
+        post = post.likes.filter((id) => id !== String(req.userId));
+    }
+
+    const updatedPost = await PostMessage.findByIdAndUpdate(id, post, {new: true});
 
     res.json(updatedPost);
 
