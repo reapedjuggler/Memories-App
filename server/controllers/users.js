@@ -13,10 +13,16 @@ const signIn = async (req, res, next) => {
 
     try {
 
+
+        // console.log("Welcome to SignIn -----------\n");
+
+        // console.log(req.body, " Iam in signin");
+
         const {email, password} = req.body;   
+ 
         const isEmailRegisteredResp = await user.findOne({email: email});
 
-        if (isEmaiu8lRegisteredResp.length === 0) {
+        if (isEmailRegisteredResp.length === 0) {
         
             return res.status(404).json({message: "Provided Email doesn't exist"});
         
@@ -54,20 +60,28 @@ const signIn = async (req, res, next) => {
 
 const signUp = async (req, res, next) => {
 
+    // console.log("Welcome to SignUp -----------\n");
+
+    // console.log(req.body, " Iam in signup");
+
     try {
 
-        const {email, password, firstName, lastName, cnfPassword} = req.body;
+        const {email, password, firstName, lastName, cnfpassword} = req.body;
 
         // Check if this profile already exist or not
         
         const isAlreadyReg = await user.find({email: email});
 
-        if (isAlreadyReg === false) {
+        // console.log(isAlreadyReg, " Am i reg\n");
+
+        if (isAlreadyReg.length) {
             console.log("User has already registered, dont waste your time!!\n\n");
-            res.status(409).send("Another user exist with the given email id, Kindly Log In if you're already registered");
+            return res.status(409).json("Another user exist with the given email id, Kindly Log In if you're already registered");
         }
 
-        if (password !== cnfPassword) return res.status(404).json({message: "Password doesn't match"});
+        if (password !== cnfpassword) return res.status(404).json({message: "Password doesn't match"});
+
+        // console.log(" Password matched\n");
 
 
         // Arigato Stack Overflow for updating there results
@@ -79,25 +93,32 @@ const signUp = async (req, res, next) => {
 
         */
 
-        const hashPassword = await bcrypt.hash(myPlaintextPassword, saltRounds)
+        const saltRounds = 12;       // A parameter for the creation of hash;
 
-        const data = new user({
+        const hashPassword = await bcrypt.hash(password, saltRounds)
+
+        const data = {
             email: email,
-            firstName: firstName,
-            lastName: lastName,
+            name: firstName + " " + lastName,
             password: hashPassword,
-        });
+        };
 
-        
-        const resp = await data.create();  // Pro -- Tip:  When we create a new document we use .create otherwise we use .save to update
+        const resp = await user.create(data);  // Pro -- Tip:  When we create a new document we use .create otherwise we use .save to update
+
+        // console.log(resp, " \n-------------\n Iam the new resp\n\n")
+
+        const privateKey = process.env.key;
 
         const token = jwt.sign({email: resp.email, id: resp._id}, privateKey, {expiresIn: '1h'});
 
         console.log("yo! success, from rags to riches");
 
-        res.status(200).json({user: resp, token: token});
+        // 201 stands for the request has been created genrally used for post request
+
+        res.status(201).json({resp, token });
 
     } catch (err) {
+        console.log(err, " \n-----------\nIam err in signup\n\n");
         res.status(500).json({message: "F! Something Went Wrong, I'ma sleep Again"});
     }
 

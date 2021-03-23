@@ -18,7 +18,7 @@ const Auth = () => {
         lastName: '',
         email: '',
         password: '',
-        cnfPassword: ''  
+        cnfpassword: ''  
     };
 
     const [isLog, setIsLog] = useState(false);
@@ -83,7 +83,9 @@ const Auth = () => {
 
     const handleChange = (e) => {
         e.preventDefault();
+        
         // const fieldNeedToBeUpdated = e.target.name;
+        
         // console.log(e.target.value,  " --- ", e.target.name, " Iam event \n\n\n");
 
         /* 
@@ -92,6 +94,8 @@ const Auth = () => {
             And on the Contrary we want to update a particular field so we need to specify it in the below given manner inside [  ] these brackets;
         
         */
+
+        // console.log(e.target.name);    
 
         setFormData({...formData, [e.target.name]: e.target.value});
     };
@@ -217,11 +221,11 @@ const Auth = () => {
                                             
                                             </Grid>
                                             
-                                            {/* Not Needed as we have rendered it eitherway */}
+                                            {/* Below field Not Needed as we have rendered it eitherway */}
 
                                             {/* <Input required label = "Pass-Word" type = "cnfPassword" name = "Confirm Password" handleChange={showPass} /> */}
                                             
-                                            <Input required label = "Confirm Pass-Word" type = "password" name = "Confirm Password" handleChange={showPass} />
+                                            <Input required label = "Confirm Pass-Word" type = "password" name = "cnfpassword" handleChange={handleChange} />
                                             
                                             <div className = {classes.divEle}>
                                             <Button size = "large" variant = "contained" color = "primary" onClick = {handleSubmit}> Submit </Button>  

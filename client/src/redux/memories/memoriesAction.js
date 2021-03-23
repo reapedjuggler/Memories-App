@@ -19,7 +19,6 @@ export const getPosts = () => async (dispatch) => {
 export const createPost = (post) => async (dispatch) => {
    
     try {
-
         const { data } = await api.createPost(post);
         dispatch({type: CREATE, payload: data});
 
@@ -68,6 +67,26 @@ export const likePost = (id) => async(dispatch) => {
     }
 
 }
+
+// Moved to a different auth actions in auth 
+
+// export const signIn = (postData) => async (dispatch) => {
+//     try {
+
+//     } catch (err) {
+
+//     }
+// }
+
+// export const signUp = (postData) => async (dispatch) => {
+//     try {
+
+//     } catch (err) {
+        
+//     }
+// }
+
+
 
 // export const auth = ({finalResp}) => {
 

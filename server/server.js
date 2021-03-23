@@ -15,7 +15,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
 app.use('/index', require('./routes/index').route);
-app.use('/user', require('./routes/user').route);
+app.use('/users', require('./routes/user').route);
 
 const PORT = process.env.PORT || 8000;
 
