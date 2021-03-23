@@ -7,9 +7,13 @@ const auth = async (req, res, next) => {
         /* Note */
         // Certainly jwt has three components so 2nd one is the token
 
-        const providedToken = await req.headers.authorization.split(" ")[1];
+        console.log(req.headers, " Iam headers\n\n");
 
-        const customToken = token.length < 500; // it means its a simple sign up not a google sign up
+        const providedToken = req.headers.authorization.split(" ")[1];
+
+        console.log(providedToken);
+
+        const customToken = providedToken.length < 500; // it means its a simple sign up not a google sign up
 
         let decoded;
 
@@ -19,7 +23,7 @@ const auth = async (req, res, next) => {
 
             const secret = process.env.key;
 
-            decoded = jwt.verify(token, secret);
+            decoded = jwt.verify(providedToken, secret);
 
             /*
                 In this way if we make middleware we can populate our request
@@ -38,7 +42,7 @@ const auth = async (req, res, next) => {
 
         } else {               // Its Google Token 
 
-            decoded = jwt.decode(token);
+            decoded = jwt.decode(providedToken);
 
             req.userId = decoded.sub;    
 

@@ -3,13 +3,13 @@ import useStyles from './formsStyle';
 import { TextField, Button, Typography, Paper } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import FileBase from 'react-file-base64'
+import { Grid } from '@material-ui/core';
 
 import { createPost, updatePost } from '../../redux/memories/memoriesAction';
 
 const Form = ({currentId, setCurrentId}) => {
 
     const [postData, setPostData] = useState({
-        creator: '',
         title: '',
         message: '',
         tags: '',
@@ -19,7 +19,8 @@ const Form = ({currentId, setCurrentId}) => {
     const classes = useStyles();
     const dispatch = useDispatch();
     const post = useSelector((state) => currentId ? state.memoryReducer.find((post) => post._id === currentId) : null);
-   
+    const user = JSON.parse(localStorage.getItem('authDetails'));
+
     // For updating a post
     useEffect(() => {
 
@@ -32,7 +33,7 @@ const Form = ({currentId, setCurrentId}) => {
 
     const clear = () => {
       setCurrentId(0);
-      setPostData({ creator: '', title: '', message: '', tags: '', selectedFile: '' });
+      setPostData({title: '', message: '', tags: '', selectedFile: '' });
     }
 
     const handleSubmit = async (e) => {
@@ -40,7 +41,7 @@ const Form = ({currentId, setCurrentId}) => {
           e.preventDefault();
 
           if (currentId === 0) {
-            dispatch(createPost(postData));
+            dispatch(createPost({...postData, name: user?.resp?.name}));
           }
 
           else {
@@ -49,6 +50,20 @@ const Form = ({currentId, setCurrentId}) => {
           
           clear();
     };
+
+    if (!user?.resp?.name) {
+
+      console.log(user, " I seriously need Sleeeeeeeeeeeep!!!\n");
+
+      return (
+        <Grid>
+          <Typography variant = "h4">
+            You need to be logged in first to create an Account
+          </Typography>
+        </Grid>
+      )
+
+    }
 
     return (
         <Paper className={classes.paper}>
@@ -64,14 +79,14 @@ const Form = ({currentId, setCurrentId}) => {
               
             </Typography>
             
-            <TextField 
+            {/* <TextField 
             name = "creater" 
             variant = "outlined" 
             label = "creater" 
             value = {postData.creator}
             onChange = {(e) => setPostData({...postData, creator: e.target.value})}
             fullWidth/>
-            
+             */}
             <TextField 
             name = "title" 
             variant = "outlined" 

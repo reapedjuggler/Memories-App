@@ -18,10 +18,11 @@ const Post = ({setCurrentId, post}) => {
         <Card className={classes.card}>
           
                 <CardMedia className={classes.media} image = {post.selectedFile} title = {post.title} />
+
           
                 <div className={classes.overlay}>
-                    <Typography variant = "h6">{post.creator}</Typography>
-                    <Typography variant = "body2"> {moment(post.createdAt).fromNow()}</Typography>
+                    <Typography variant = "h6">{post.name}</Typography>
+                    <Typography variant = "body2"> {post.createdAt}</Typography>
                 </div>
 
                 <div className = {classes.overlay2}> 
@@ -45,7 +46,7 @@ const Post = ({setCurrentId, post}) => {
                         <Button size = "small" color = "primary" onClick = {() => dispatch(likePost(post._id))}>
                             <ThumbUpAltIcon fontSize = "small" />
                                 Like &nbsp;
-                                {post.likeCount}
+                                {post.likes.length ? 1 : 0}
                         </Button>
 
                         <Button size = "small" color = "primary" onClick = {() => dispatch(deletePost(post._id))}>

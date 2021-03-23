@@ -6,9 +6,23 @@ import axios from 'axios';
 //     baseUrl: 'http://localhost:8000'
 // });
 
+axios.interceptors.request.use((req) => {
+
+    console.log(localStorage.getItem('authDetails'), " Iam token outside\n\n");
+
+    if (localStorage.getItem('authDetails')) {
+        const token = JSON.parse(localStorage.getItem('authDetails')).token;
+        console.log(token, " Iam token\n\n");
+        req.headers.authorization ='Bearer ' + token;
+    }
+ 
+    return req;
+
+})
+
 const url = "http://localhost:8000";
 
-export const fetchPost = () => axios.get();
+export const fetchPost = () => axios.get(url + '/index');
 
 export const createPost = (newPost) => {
     // return axios.post(url, newPost);             // Forgot this " return "" mofo which costed me a day pfft :/

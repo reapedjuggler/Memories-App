@@ -25,7 +25,7 @@ export const createPost = (post) => async (dispatch) => {
     } catch (err) {
         console.log(err.message);
     }
-}
+}   
 
 export const updatePost = (id, post) => async(dispatch) => {
 

@@ -14,9 +14,13 @@ const getPost = async (req, res, next) => {
 }
 
 const createPost = async (req, res) => {
-    const { title, message, selectedFile, creator, tags } = req.body;
+    const post = req.body;
 
-    const newPostMessage = new PostMessage({ title, message, selectedFile, creator, tags })
+    console.log(post , " Iam post\n\n");
+
+    const newPostMessage = new PostMessage({...post, creator: post.userId, createdAt: new Date().toString()})
+
+    console.log(newPostMessage);
 
     try {
         await newPostMessage.save();
@@ -64,11 +68,11 @@ const likePost = async (req, res, next) => {
 
     if (!mongoose.Types.ObjectId.isValid(id))  return res.status(404).send('No Post available with that id');
 
-    const post = await PostMessage.findById(id);
+    let post = await PostMessage.findById(id);
     
     // first check if he has already liked the post then we wont let him again do it 
 
-    const ind = post.likes.findIndex((id) => String(id) === String(req.userId));
+    let ind = post.likes.findIndex((id) => String(id) === String(req.userId));
 
     if (ind === -1) {
         post.likes.push(req.userId);    
@@ -76,7 +80,7 @@ const likePost = async (req, res, next) => {
         post = post.likes.filter((id) => id !== String(req.userId));
     }
 
-    const updatedPost = await PostMessage.findByIdAndUpdate(id, post, {new: true});
+    let updatedPost = await PostMessage.findByIdAndUpdate(id, post, {new: true});
 
     res.json(updatedPost);
 

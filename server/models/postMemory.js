@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const postSchema = new Schema({
-    creator: String,
+    name: String,
 
     title: String,
     
@@ -14,15 +14,14 @@ const postSchema = new Schema({
     
     tags: [String],
 
+    creator: String,
+
     likes: {
         type: [String],
         default: [],
     },
 
-    createdAt: {
-        type: Date,
-        default: new Date,
-    }
+    createdAt: String
 });
 
 exports = module.exports = mongoose.model('postSchema', postSchema);
