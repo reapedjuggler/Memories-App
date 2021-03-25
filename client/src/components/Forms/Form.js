@@ -53,12 +53,12 @@ const Form = ({currentId, setCurrentId}) => {
 
     if (!user?.resp?.name) {
 
-      console.log(user, " I seriously need Sleeeeeeeeeeeep!!!\n");
+      // console.log(user, " I seriously need Sleeeeeeeeeeeep!!!\n");
 
       return (
         <Grid>
           <Typography variant = "h4">
-            You need to be logged in first to create an Account
+            You need to be logged in first to create a Post
           </Typography>
         </Grid>
       )
@@ -75,7 +75,7 @@ const Form = ({currentId, setCurrentId}) => {
                   currentId ? `Editing ` : `Creating `
               }
 
-              a memory
+              A memory
               
             </Typography>
             

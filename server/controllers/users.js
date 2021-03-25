@@ -16,11 +16,13 @@ const signIn = async (req, res, next) => {
 
         // console.log("Welcome to SignIn -----------\n");
 
-        // console.log(req.body, " Iam in signin");
+        console.log(req.body, " Iam in signin");
 
         const {email, password} = req.body;   
  
         const isEmailRegisteredResp = await user.findOne({email: email});
+
+        console.log("\n---------------------\n" , isEmailRegisteredResp, "\n--------------------\n");
 
         if (isEmailRegisteredResp.length === 0) {
         
@@ -105,7 +107,7 @@ const signUp = async (req, res, next) => {
 
         const resp = await user.create(data);  // Pro -- Tip:  When we create a new document we use .create otherwise we use .save to update
 
-        // console.log(resp, " \n-------------\n Iam the new resp\n\n")
+        console.log(resp, " \n-------------\n Iam the new resp\n\n")
 
         const privateKey = process.env.key;
 

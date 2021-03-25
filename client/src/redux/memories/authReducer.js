@@ -8,7 +8,7 @@ const memoryReducerAuth = (intialAuthState = {details: null}, action) => {
             localStorage.setItem('authDetails', JSON.stringify({...action?.payload}));
             return {...intialAuthState, authData: action?.payload};
         case LOGOUT:
-            console.log("F my life");     // just clear your local storage over here
+            // console.log("F my life");     // just clear your local storage over here
             localStorage.clear();
             return {...intialAuthState, authData: null};
         default:

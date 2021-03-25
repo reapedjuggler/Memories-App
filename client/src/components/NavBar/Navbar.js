@@ -19,7 +19,7 @@ const Navbar = () => {
     const location = useLocation();
     const dispatch = useDispatch();
 
-    console.log(user, " Why aint i logged in!!");
+    // console.log(user, " Why aint i logged in!!");
 
     // useEffect(() => {
 
@@ -33,7 +33,7 @@ const Navbar = () => {
 
     useEffect(() => {
 
-        const token = user?.tokenId;
+        // const token = user?.tokenId;
 
         // We need to implement the JWT over here
        
@@ -77,8 +77,8 @@ const Navbar = () => {
                 {
                     user ? (
                         <div className={classes.profile}>
-                            <Avatar className={classes.purple} alt = {user.resp.name} src = {user.resp.imageUrl}> {user?.resp?.name.charAt(0)} </Avatar>
-                            <Typography className={classes.userName} varaint = "h6"> {user.resp.name} </Typography>
+                            <Avatar className={classes.purple} alt = {user?.resp?.name} src = {user?.resp?.imageUrl}> {user?.resp?.name.charAt(0)} </Avatar>
+                            <Typography className={classes.userName} varaint = "h6"> {user?.resp?.name} </Typography>
                             <Button variant = "contained" className={classes.logout} onClick = {logOutUser}> Logout </Button>
                         </div>
                     ) : (

@@ -14,22 +14,28 @@ const Post = ({setCurrentId, post}) => {
     const classes = useStyles();
     const dispatch = useDispatch();
     const user = JSON.parse(localStorage.getItem('authDetails'));
-
+ 
     const Likes = () => {
         
-        console.log(user.resp._id, " Iam user id ", post?.creator, " Iam post id\n\n")
-
-        {post.likes.find((like) => like === (user.resp.googleId || user.resp._id))}
 
         if (post.likes.length > 0) {
-
+ 
             return (
-                <>
-                <ThumbUpAltIcon fontSize = "small">
-                </ThumbUpAltIcon>
-                {`You and ${post.likes.length} others`}
-                </>
-            )
+
+                post?.likes.find((like) => like === (user?.resp?.googleId || user?.resp?._id)) ? (
+                    <>                                      
+                    <ThumbUpAltIcon fontSize = "small">
+                    </ThumbUpAltIcon>
+                    {`You and ${post?.likes?.length} others`}
+                    </>
+                ) : (
+                    <>                                      
+                    <ThumbUpAltIcon fontSize = "small">
+                    </ThumbUpAltIcon>
+                    {`${post?.likes?.length} other people like this`}
+                    </>   
+                )
+            )                                           
 
         }
 
@@ -73,11 +79,11 @@ const Post = ({setCurrentId, post}) => {
                 
                 <CardActions className = {classes.cardActions}>
                        
-                        <Button size = "small" color = "primary" onClick = {() => dispatch(likePost(post._id))}>
+                        <Button size = "small" color = "primary" onClick = {() => dispatch(likePost(post?._id))}>
                             <Likes />
                         </Button>
 
-                        <Button size = "small" color = "primary" onClick = {() => dispatch(deletePost(post._id))}>
+                        <Button size = "small" color = "primary" onClick = {() => dispatch(deletePost(post?._id))}>
                             
                             {/* 
                                 Not everyone can delete the post ,only the same user who
@@ -86,7 +92,7 @@ const Post = ({setCurrentId, post}) => {
                             
                             {
 
-                                    user.resp._id.toString() === post?.creator?.toString() ? (
+                                    (user?.resp?._id?.toString() === post?.creator?.toString() || user?.resp?.googleId === post?.creator) ? (
                                         <>
                                         <DeleteIcon fontSize = "small" />
                                             Delete &nbsp;

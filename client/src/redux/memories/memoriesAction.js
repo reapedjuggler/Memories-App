@@ -33,7 +33,7 @@ export const updatePost = (id, post) => async(dispatch) => {
 
         const ace = await api.updatePost(id, post);
         
-        console.log(ace, "\nftw :D \n\n");
+        // console.log(ace, "\nftw :D \n\n");
 
         const { data } = ace;
         dispatch({type: UPDATE, payload: data});

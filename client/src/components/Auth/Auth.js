@@ -21,7 +21,7 @@ const Auth = () => {
         cnfpassword: ''  
     };
 
-    const [isLog, setIsLog] = useState(false);
+    const [isLog, setIsLog] = useState(true);
     const classes = useStyles();
     const dispatch = useDispatch();           // setting a ref to useDispatch so that we can fire an action directly from here
     const history = useHistory();
@@ -36,23 +36,25 @@ const Auth = () => {
         const tokenId = response?.tokenId;
         const profile = response?.profileObj;
 
-        const finalResp = {result: profile, tokenId: tokenId};
+        // const finalResp = {result: profile, tokenId: tokenId};
 
         try {
             
+            console.log("Ok working googgle sign in front-end\n\n");
             dispatch ({type: 'AUTH', payload: {profile, tokenId}});
             history.push('/');
 
         }
 
         catch (err) {
-
+            console.log(err, "Iam err in google success\n\n");
         }
 
     }
 
-    const failResponseGoogle = () => {
-        console.log("Oops! Some Error occurred while signing In, Please Try again later")
+    const failResponseGoogle = (resp) => {
+        console.log("Oops! Some Er  ror occurred while signing In, Please Try again later")
+        console.log(resp, " Iam error in google fail\n\n");
     }
 
     // useEffect (() => {
@@ -67,7 +69,7 @@ const Auth = () => {
     const handleSubmit = (e) => {
 
         // e.preventDefault();          // Because React's default behaviour is to refresh the page when a form gets submitted;
-        console.log(formData, "  Iam form data after update\n\n");
+        // console.log(formData, "  Iam form data after update\n\n");
 
         if (isLog) 
             dispatch(signIn({formData, history}));

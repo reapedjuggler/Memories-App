@@ -6,7 +6,7 @@ const getPost = async (req, res, next) => {
     try {
         const postMessages = await PostMessage.find();
         // console.log('iam post messages\n', postMessages, "\n");
-        console.log("Worked fine");
+        // console.log("Worked fine");
         res.status(200).send(postMessages);
     } catch (err) {
         res.status(404).send({message: err.message});
@@ -14,9 +14,10 @@ const getPost = async (req, res, next) => {
 }
 
 const createPost = async (req, res) => {
+    
     const post = req.body;
 
-    console.log("\n\n\n", post , " Iam post\n\n");
+    // console.log("\n\n\n", post , " Iam post\n\n");
 
     const newPostMessage = new PostMessage({...post, creator: req.userId.toString(), createdAt: new Date().toString()})
 
@@ -70,22 +71,31 @@ const likePost = async (req, res, next) => {
 
     let post = await PostMessage.findById(id);
     
+    let tempPost = post;
+
     // first check if he has already liked the post then we wont let him again do it 
 
     let ind = post.likes.findIndex((id) => String(id) === String(req.userId));
 
+    console.log("\n Earlier ID  -------------------\n", id, "\n");
+    console.log("\n Earlier userId-------------------\n", req.userId, "\n");
+    
+    console.log("\n Earlier -------------------\n", post, "\n");
+
     if (ind === -1) {
         post.likes.push(req.userId);    
     } else {
-        post = post.likes.filter((id) => id !== String(req.userId));
+        post.likes = post.likes.filter((id) => id.toString() !== (req.userId.toString()));
     }
 
-    let updatedPost = await PostMessage.findByIdAndUpdate(id, post, {new: true});
+    console.log("\n Later -------------------\n", post, "\n");
 
-    res.json(updatedPost);
+    let updatedPost = await PostMessage.findByIdAndUpdate(id, {...tempPost, likes: post}, {new: true});
 
     try {
-        console.log(updatedPost);
+    
+        console.log("\n---------------\n", updatedPost, "\n\n");
+        res.json(updatedPost);
     }
 
     catch (err) {

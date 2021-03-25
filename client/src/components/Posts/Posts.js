@@ -7,7 +7,7 @@ import {Grid, CircularProgress} from '@material-ui/core'
 const Posts = ({ setCurrentId }) => {
 
     const posts = useSelector((state) => state.memoryReducer)
-    console.log(posts, " hey iam Posssssssts\n");
+    // console.log(posts, " hey iam Posssssssts\n");
     const classes = useStyles();
 
     return (

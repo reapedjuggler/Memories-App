@@ -5,7 +5,7 @@ export const signIn = ({formData, history}) => async (dispatch) => {
  
     try {
         
-        console.log(formData, "  and ", history);
+        // console.log(formData, "  and ", history);
 
         try {   
             
@@ -29,11 +29,11 @@ export const signIn = ({formData, history}) => async (dispatch) => {
 export const signUp = ({formData, history}) => async (dispatch) => {
 
     try {
-        console.log(formData, "  and ", history + " \nin signup");
+        // console.log(formData, "  and ", history + " \nin signup");
 
         const {data} = await api.signUp(formData);
 
-        console.log(data, " I need SLEEP please\n");
+        // console.log(data, " I need SLEEP please\n");
 
         dispatch({type: "AUTH", payload: data})
 
