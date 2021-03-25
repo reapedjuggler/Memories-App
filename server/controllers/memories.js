@@ -16,9 +16,9 @@ const getPost = async (req, res, next) => {
 const createPost = async (req, res) => {
     const post = req.body;
 
-    console.log(post , " Iam post\n\n");
+    console.log("\n\n\n", post , " Iam post\n\n");
 
-    const newPostMessage = new PostMessage({...post, creator: post.userId, createdAt: new Date().toString()})
+    const newPostMessage = new PostMessage({...post, creator: req.userId.toString(), createdAt: new Date().toString()})
 
     console.log(newPostMessage);
 

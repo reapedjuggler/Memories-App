@@ -13,8 +13,38 @@ const Post = ({setCurrentId, post}) => {
 
     const classes = useStyles();
     const dispatch = useDispatch();
+    const user = JSON.parse(localStorage.getItem('authDetails'));
+
+    const Likes = () => {
+        
+        console.log(user.resp._id, " Iam user id ", post?.creator, " Iam post id\n\n")
+
+        {post.likes.find((like) => like === (user.resp.googleId || user.resp._id))}
+
+        if (post.likes.length > 0) {
+
+            return (
+                <>
+                <ThumbUpAltIcon fontSize = "small">
+                </ThumbUpAltIcon>
+                {`You and ${post.likes.length} others`}
+                </>
+            )
+
+        }
+
+        return (
+            <>
+            <ThumbUpAltIcon fontSize = "small">
+            </ThumbUpAltIcon>
+            {`Like`}
+            </>
+        )
+
+    }
 
     return (
+
         <Card className={classes.card}>
           
                 <CardMedia className={classes.media} image = {post.selectedFile} title = {post.title} />
@@ -44,15 +74,30 @@ const Post = ({setCurrentId, post}) => {
                 <CardActions className = {classes.cardActions}>
                        
                         <Button size = "small" color = "primary" onClick = {() => dispatch(likePost(post._id))}>
-                            <ThumbUpAltIcon fontSize = "small" />
-                                Like &nbsp;
-                                {post.likes.length ? 1 : 0}
+                            <Likes />
                         </Button>
 
                         <Button size = "small" color = "primary" onClick = {() => dispatch(deletePost(post._id))}>
-                            <DeleteIcon fontSize = "small" />
-                                Delete &nbsp;
-                        </Button>
+                            
+                            {/* 
+                                Not everyone can delete the post ,only the same user who
+                                created the post can delete it other wise not
+                            */}
+                            
+                            {
+
+                                    user.resp._id.toString() === post?.creator?.toString() ? (
+                                        <>
+                                        <DeleteIcon fontSize = "small" />
+                                            Delete &nbsp;
+                                        </>
+                                    ) : (
+                                        <></>
+                                    )                              
+
+                            }
+                               
+                            </Button>
 
                 </CardActions>
         </Card>
