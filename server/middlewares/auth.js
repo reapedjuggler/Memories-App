@@ -44,6 +44,8 @@ const auth = async (req, res, next) => {
 
             decoded = jwt.decode(providedToken);
 
+            console.log(decoded, "  iam google tooken\n\n");
+
             req.userId = decoded.sub;    
 
             next();
