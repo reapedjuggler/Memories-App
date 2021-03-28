@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{ useEffect } from 'react';
 import { Card, CardActions, CardContent, CardMedia, Button, Typography } from '@material-ui/core/';
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -13,8 +13,14 @@ const Post = ({setCurrentId, post}) => {
 
     const classes = useStyles();
     const dispatch = useDispatch();
-    const user = JSON.parse(localStorage.getItem('authDetails'));
+    let user = JSON.parse(localStorage.getItem('authDetails'));
  
+    // useEffect(() => {
+
+    //     user = JSON.parse(localStorage.getItem('authDetails'));
+
+    // }, [user])
+
     const Likes = () => {
         
 
@@ -61,11 +67,18 @@ const Post = ({setCurrentId, post}) => {
                     <Typography variant = "body2"> {post.createdAt}</Typography>
                 </div>
 
-                <div className = {classes.overlay2}> 
-                    <Button style = {{color: "white"}} size = "small" onClick = {() => setCurrentId(post._id)}>
-                        <MoreHorizIcon fontSize = "default"></MoreHorizIcon>
-                    </Button>
-                </div>
+                {
+                    (user?.resp?._id?.toString() === post?.creator?.toString() || user?.profile?.googleId === post?.creator) ? (
+
+                        <div className = {classes.overlay2}> 
+                            <Button style = {{color: "white"}} size = "small" onClick = {() => setCurrentId(post._id)}>
+                                <MoreHorizIcon fontSize = "default"></MoreHorizIcon>
+                            </Button>
+                        </div>
+                    ) : (
+                        <> </>           // React fragments ftw XD    
+                    )
+                }
 
                 <div className = {classes.details}> 
                     <Typography variant = "body2" color = "textSecondary" > {post.tags.map((tag) => `#${tag}`)} </Typography>
@@ -90,9 +103,11 @@ const Post = ({setCurrentId, post}) => {
                                 created the post can delete it other wise not
                             */}
                             
+                            {/* { console.log(user, " Iam user for delete\n")} */}
+
                             {
 
-                                    (user?.resp?._id?.toString() === post?.creator?.toString() || user?.resp?.googleId === post?.creator) ? (
+                                    (user && (user?.resp?._id?.toString() === post?.creator?.toString() || user?.profile?.googleId === post?.creator)) ? (
                                         <>
                                         <DeleteIcon fontSize = "small" />
                                             Delete &nbsp;

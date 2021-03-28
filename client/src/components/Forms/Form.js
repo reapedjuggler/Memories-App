@@ -41,7 +41,13 @@ const Form = ({currentId, setCurrentId}) => {
           e.preventDefault();
 
           if (currentId === 0) {
-            dispatch(createPost({...postData, name: user?.resp?.name}));
+            if (user?.resp) {
+             
+              dispatch(createPost({...postData, name: user?.resp?.name}));
+            
+            }  else if (user?.profile) {
+              dispatch(createPost({...postData, name: user?.profile?.name}));
+            }
           }
 
           else {
@@ -51,7 +57,7 @@ const Form = ({currentId, setCurrentId}) => {
           clear();
     };
 
-    if (!user?.resp?.name) {
+    if (!user?.resp?.name && !user?.profile?.name) {
 
       // console.log(user, " I seriously need Sleeeeeeeeeeeep!!!\n");
 
@@ -66,7 +72,8 @@ const Form = ({currentId, setCurrentId}) => {
     }
 
     return (
-        <Paper className={classes.paper}>
+     
+     <Paper className={classes.paper}>
           <form autoComplete="off" noValidate className={`${classes.root} ${classes.form}`} onSubmit={handleSubmit}>
             
             <Typography variant = "h6">
