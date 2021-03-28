@@ -24,9 +24,9 @@ export const signIn = ({formData, history}) => async (dispatch) => {
         console.log(err, " Iam err in SignIn auth.js");
     }
 
-};
+};  
 
-export const signUp = ({formData, history}) => async (dispatch) => {
+export const signUp = ({formData, history}) => async (dispatch) => {    
 
     try {
         // console.log(formData, "  and ", history + " \nin signup");
