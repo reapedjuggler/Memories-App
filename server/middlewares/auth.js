@@ -7,11 +7,11 @@ const auth = async (req, res, next) => {
         /* Note */
         // Certainly jwt has three components so 2nd one is the token
 
-        console.log(req.headers, " Iam headers\n\n");
+        // console.log(req.headers, " Iam headers\n\n");
 
         const providedToken = req.headers.authorization.split(" ")[1];
 
-        console.log(providedToken);
+        // console.log(providedToken, "\n-----------\n\nIam provided token\n\n");
 
         const customToken = providedToken.length < 500; // it means its a simple sign up not a google sign up
 

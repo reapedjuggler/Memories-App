@@ -13,17 +13,19 @@ import axios from "axios";
 axios.interceptors.request.use(req => {
 	let temp = JSON.parse(localStorage.getItem("authDetails"));
 
-	console.log(temp, " \n------------------\nIam token outside\n");
+	// console.log(temp, " \n------------------\nIam token outside\n");
 
 	if (temp?.tokenId) {
 		const token = temp.tokenId;
 		// console.log(token, " Iam token\n\n");
-		req.headers.authorization = "Bearer" + token;
+		req.headers.authorization = "Bearer " + token;
 	} else if (temp?.token) {
 		const token = temp.token;
 		// console.log(token, " Iam token\n\n");
 		req.headers.authorization = "Bearer " + token;
 	}
+
+	// console.log(req.headers, "\n--------------\n\nIam headers in API\n\n");
 
 	return req;
 });
@@ -49,6 +51,7 @@ export const deletePost = id => {
 
 export const likePost = id => {
 	// return axios.patch(`${url}/${id}/likePost`);
+	console.log(id, " \nIam id in api\n\n");
 	return axios.patch(url + `/index/${id}/likePost`);
 };
 
