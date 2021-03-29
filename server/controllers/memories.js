@@ -65,6 +65,8 @@ const likePost = async (req, res, next) => {
 
     const { id } = req.params;
 
+    console.log(id, " Im id in like\\n-----------------\n\n");
+
     if (!req.userId) return res.json({message: 'Sorry! You are not authorized to do so :('})
 
     if (!mongoose.Types.ObjectId.isValid(id))  return res.status(404).send('No Post available with that id');
