@@ -31,6 +31,8 @@
 
 
 **Fork the repository**
+<br>
+
 **Clone the repository**
 ```
 $ git clone https://github.com/reapedjuggler/Memories-App
