@@ -27,11 +27,11 @@
   <li>JWT</li>
   <br>
   
-## For Executing it locally**
+## For Executing it locally
 
 
-** Fork the repository**
-** Clone the repository**
+**Fork the repository**
+**Clone the repository**
 ```
 $ git clone https://github.com/reapedjuggler/Memories-App
 $ cd Memories-App
